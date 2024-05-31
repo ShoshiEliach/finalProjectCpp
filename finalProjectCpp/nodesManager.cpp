@@ -1,3 +1,3 @@
 #include "nodesManager.h"
-node<int> getNodeById(int nodeId);
+node getNodeById(int nodeId);
 

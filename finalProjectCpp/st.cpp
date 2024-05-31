@@ -1,5 +1,6 @@
 #include "st.h"
-#include "functions.h"
+#include "functions2.h"
+
 
 
 
@@ -62,6 +63,28 @@ vector<string> st::getRand_out()
 	return this->rand_out;
 }
 
+int st::getId_node()
+{
+	return this->id_node;
+}
+
+string st::print_waiting_time()
+{
+	std::string output = "not waiters";
+	if (!this->getListCars().empty()) {
+		std::chrono::system_clock::time_point firstTimePoint = this->getListCars().front();
+		std::time_t time = std::chrono::system_clock::to_time_t(firstTimePoint);
+		std::tm* timeDetails = std::localtime(&time);
+		int minutes = timeDetails->tm_min;
+		int seconds = timeDetails->tm_sec;
+
+		output = "time of waiting: " + std::to_string(minutes) + ":" + std::to_string(seconds);
+
+	}
+	return output;
+
+}
+
 string st::getAaxisId()
 {
 	return axisId;
@@ -89,6 +112,11 @@ void st::setStartLight(std::chrono::system_clock::time_point start)
 
 }
 
+void st::setId_node(int idn)
+{
+	this->id_node = idn;
+}
+
 void st::deleteCarsTravel()
 {
 	std::time_t current_time = std::time(nullptr);
@@ -99,6 +127,7 @@ void st::deleteCarsTravel()
 
 			std::chrono::system_clock::time_point timeValueFirst = cars_list.front();
 			double timeDifference = std::difftime(current_time, std::chrono::system_clock::to_time_t(timeValueFirst));
+			//לקרוא מקובץ חיצוני
 			if (timeDifference >= 4)
 			{
 				cars_list.pop_front();
@@ -111,8 +140,18 @@ void st::deleteCarsTravel()
 
 void st::addCar(std::chrono::system_clock::time_point new_car, int priority1)
 {
+	carsInSt cIs;
+	
 	this->cars_list.push_back(new_car);
+	///לקרןא מקובץ חיצוני
+	if (this->getId_node() == 5)
+	{
+		std::string id_st_for_car = std::string(1, this->getId()[0]);
+		cIs.add_new_car(id_st_for_car);
+
+	}
 	this->setPriority(priority1);
+	
 
 }
 

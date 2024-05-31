@@ -22,7 +22,7 @@ public:
     void push(const std::string& id, const std::map<int, int>& members);
     void pop();
     ElementAxis top();
-    void updateValue(const std::string& id, int& member, int newValue);
+    void updateValue(const std::string& id, int member, int newValue);
 
 
     bool checkTopId(const std::string& id);
