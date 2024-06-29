@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include "functions.h"
 #include "node.h"
 //#include "node.cpp"
@@ -115,62 +116,9 @@ void functions::parsePythonList(const std::vector<std::tuple<int, int, int>>& ed
     // Assuming edges is the original variable
     std::vector<std::tuple<int, int, int>> edgesCopy(edges.begin(), edges.end());
     std::map<int, std::vector<std::tuple<int, int, int>>> AllStForNodes = decomposeVector(edgesCopy);
+=======
+>>>>>>> 291b4d0c445a10d666ce58a2a6915f0dfd4d609a
 
 
 
-    for (const auto& edge : edges) {
-        int source = std::get<0>(edge);
-        sourceStrings.push_back(source);
-        int destination = std::get<1>(edge);
-        int weight = std::get<2>(edge);
-
-        std::cout << "Source: " << source << ", Destination: " << destination << ", Weight: " << weight << std::endl;
-
-        sourceStrings = removeDuplicates(sourceStrings);
-
-        nodes = createNodesFromStrings(sourceStrings);
-    }
-    intliaizeNextNode(AllStForNodes, nodes);
-    nM.setAllNodes(nodes);
-
-}
-
-//  פונקציה מקבלת רשימה של צמתים ומשקלים ומפרקת אותם למקור,יעד ומשקל 
-extern "C"
-{
-    void parseAndPrint(int* data, int length) {
-        std::vector<std::tuple<int, int, int>> edges;
-        for (int i = 0; i < length; i += 3) {
-            edges.push_back(std::make_tuple(data[i], data[i + 1], data[i + 2]));
-        }
-        functions f;
-        f.parsePythonList(edges);
-    }
-}
-
-void axis() {
-    //לחלק את הצמתים לצירים לפי פייתון ולהגדיר לכל נתיב בכל צומת איזה ציר הוא שייך
-}
-
-
-
-
-
-
-
-
-//מקבלת את החלוקה לצירים מפייתון
-extern "C"
-{
-
-    void process_graph_data(std::pair<char, std::tuple<int, int, int>>* data, int size)
-    {
-
-        for (int i = 0; i < size; ++i) {
-            char key = data[i].first;
-            std::tuple<int, int, int> value = data[i].second;
-            nM.setAxisInRoad(std::string(1, key), { value });
-        }
-    }
-}
-
+#include "functions.h"

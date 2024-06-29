@@ -27,6 +27,21 @@
     <ClCompile Include="st.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
+=======
+    <ClCompile Include="fromExcel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Element.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="carsInSt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="functions2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+>>>>>>> 291b4d0c445a10d666ce58a2a6915f0dfd4d609a
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="heapqueue.h">
@@ -38,5 +53,20 @@
     <ClInclude Include="st.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
+=======
+    <ClInclude Include="fromExcel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Element.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="carsInSt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="functions2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+>>>>>>> 291b4d0c445a10d666ce58a2a6915f0dfd4d609a
   </ItemGroup>
 </Project>

@@ -5,6 +5,7 @@ class nodeInAxis
 private:
 	priorityAxis pqAxis;
 
+
 public:
 	priorityAxis getPqAxis() {
 		return pqAxis;

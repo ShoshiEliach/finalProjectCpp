@@ -70,6 +70,10 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);C:\Users\User\AppData\Local\Programs\Python\Python39\include</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)C:\Users\User\AppData\Local\Programs\Python\Python39\libs</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -102,12 +106,22 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+<<<<<<< HEAD
+=======
+      <AdditionalIncludeDirectories>C:\Users\User\Downloads\libxl-win-4.3.0.14\libxl-4.3.0.14\include_cpp</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+>>>>>>> 291b4d0c445a10d666ce58a2a6915f0dfd4d609a
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+<<<<<<< HEAD
+=======
+      <AdditionalLibraryDirectories>C:\Users\User\Downloads\libxl-win-4.3.0.14\libxl-4.3.0.14\include_cpp</AdditionalLibraryDirectories>
+      <AdditionalDependencies>"C:\Users\User\AppData\Local\Programs\Python\Python39\libs\python39.lib"</AdditionalDependencies>
+>>>>>>> 291b4d0c445a10d666ce58a2a6915f0dfd4d609a
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -116,28 +130,45 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies)"C:\Users\User\AppData\Local\Programs\Python\Python39\libs\python39.lib"</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="carsInSt.cpp" />
+    <ClCompile Include="Element.cpp" />
     <ClCompile Include="finalProjectCpp.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="heapqueue.cpp" />
+=======
+    <ClCompile Include="fromExcel.cpp" />
+    <ClCompile Include="functions.cpp" />
+    <ClCompile Include="functions2.cpp" />
+>>>>>>> 291b4d0c445a10d666ce58a2a6915f0dfd4d609a
     <ClCompile Include="node.cpp" />
     <ClCompile Include="st.cpp" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ClInclude Include="heapqueue.h" />
+=======
+    <ClInclude Include="carsInSt.h" />
+    <ClInclude Include="Element.h" />
+    <ClInclude Include="fromExcel.h" />
+    <ClInclude Include="functions.h" />
+    <ClInclude Include="functions2.h" />
+>>>>>>> 291b4d0c445a10d666ce58a2a6915f0dfd4d609a
     <ClInclude Include="node.h" />
     <ClInclude Include="st.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets" />
 </Project>
