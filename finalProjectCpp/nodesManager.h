@@ -16,15 +16,15 @@ using namespace std;
 class nodesManager
 {
 private:
-	vector<node<int>> all_nodes = {};
+	vector<node> all_nodes = {};
 	map < string, vector<tuple<int, int, int>>> axisInRoad;
 	priorityAxis pqAxis;
 
 public:
-	std::vector<node<int>> getAllNodes() {
+	std::vector<node> getAllNodes() {
 		return all_nodes;
 	}
-	void setAllNodes(std::vector<node<int>> newNodesVector) {
+	void setAllNodes(std::vector<node> newNodesVector) {
 		all_nodes = newNodesVector;
 
 	}
@@ -74,12 +74,13 @@ public:
 
 	}
 
-	node<int> getNodeById(int nodeId)
+	node* getNodeById(int nodeId)
 	{
 		for (auto& n : all_nodes)
 		{
 			if (n.getIdNode() == nodeId)
-				return n;
+				return &n;
+			return nullptr;
 		}
 	}
 };

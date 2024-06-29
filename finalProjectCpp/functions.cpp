@@ -1,6 +1,6 @@
 #include "functions.h"
 #include "node.h"
-#include "node.cpp"
+//#include "node.cpp"
 #include <unordered_map>
 #include <vector>
 #include <iostream>
@@ -17,7 +17,7 @@
 using namespace std;
 nodesManager nM;
 //פונקציה שיוצרת צמתים הבאות לפי כל צומת
-void intliaizeNextNode(std::map<int, std::vector<std::tuple<int, int, int>>> AllStForNodes, std::vector<node<int>> nodes)
+void intliaizeNextNode(std::map<int, std::vector<std::tuple<int, int, int>>> AllStForNodes, std::vector<node> nodes)
 {
     auto it = AllStForNodes.begin();
     for (auto& source : nodes)
@@ -31,7 +31,7 @@ void intliaizeNextNode(std::map<int, std::vector<std::tuple<int, int, int>>> All
             for (auto& nn : nodeList)
             {
                 int nodeId = std::get<2>(nn);
-                node<int>* newNode = new node<int>(nodeId);
+                node* newNode = new node(nodeId);
 
                 int edge = std::get<1>(nn); // Second element in the list
                 source.AddNextNode(newNode, edge);
@@ -73,11 +73,11 @@ std::map<int, std::vector<std::tuple<int, int, int>>> decomposeVector(const std:
     return decomposedVectors;
 }
 
-std::vector<node<int>> createNodesFromStrings(const std::vector<int>& ids) {
-    std::vector<node<int>> nodes;
+std::vector<node> createNodesFromStrings(const std::vector<int>& ids) {
+    std::vector<node> nodes;
 
     for (const auto& id : ids) {
-        node<int> newNode(id);
+        node newNode(id);
         nodes.push_back(newNode);
     }
 
@@ -110,7 +110,7 @@ std::vector<int> removeDuplicates(std::vector<int>& vec)
 
 void functions::parsePythonList(const std::vector<std::tuple<int, int, int>>& edges)
 {
-    std::vector<node<int>> nodes;
+    std::vector<node> nodes;
     std::vector<int> sourceStrings;
     // Assuming edges is the original variable
     std::vector<std::tuple<int, int, int>> edgesCopy(edges.begin(), edges.end());

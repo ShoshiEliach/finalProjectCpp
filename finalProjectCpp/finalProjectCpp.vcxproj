@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{d2dbed02-e8a9-4071-a767-12e906346192}</ProjectGuid>
+    <ProjectGuid>{52c83847-3b34-4d64-8ac8-5b0d921ecb75}</ProjectGuid>
     <RootNamespace>finalProjectCpp</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -104,13 +104,10 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\User\Downloads\libxl-win-4.3.0.14\libxl-4.3.0.14\include_cpp</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\User\Downloads\libxl-win-4.3.0.14\libxl-4.3.0.14\include_cpp</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libxl.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -131,23 +128,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="finalProjectCpp.cpp" />
-    <ClCompile Include="fromExcel.cpp" />
-    <ClCompile Include="functions.cpp" />
+    <ClCompile Include="heapqueue.cpp" />
     <ClCompile Include="node.cpp" />
-    <ClCompile Include="nodeInAxis.cpp" />
-    <ClCompile Include="nodesManager.cpp" />
-    <ClCompile Include="priorityAxis.cpp" />
-    <ClCompile Include="priorityQueue.cpp" />
     <ClCompile Include="st.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="fromExcel.h" />
-    <ClInclude Include="functions.h" />
+    <ClInclude Include="heapqueue.h" />
     <ClInclude Include="node.h" />
-    <ClInclude Include="nodeInAxis.h" />
-    <ClInclude Include="nodesManager.h" />
-    <ClInclude Include="priorityAxis.h" />
-    <ClInclude Include="priorityQueue.h" />
     <ClInclude Include="st.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
