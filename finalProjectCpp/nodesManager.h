@@ -16,16 +16,22 @@ using namespace std;
 class nodesManager
 {
 private:
-	vector<node<int>> all_nodes = {};
+	std::vector<node> initialNodes;
+	std::vector<node>* all_nodes = &initialNodes;
 	map < string, vector<tuple<int, int, int>>> axisInRoad;
 	priorityAxis pqAxis;
 
 public:
-	std::vector<node<int>> getAllNodes() {
+	std::vector<node>* getAllNodes() {
 		return all_nodes;
 	}
-	void setAllNodes(std::vector<node<int>> newNodesVector) {
-		all_nodes = newNodesVector;
+	void setAllNodes(std::vector<node> newNodesVector) {
+		initialNodes.clear();
+		for (auto& x : newNodesVector)
+		{
+			initialNodes.push_back(x);
+
+		}
 
 	}
 
@@ -58,9 +64,11 @@ public:
 			{
 				difference = std::get<1>(tuple) - std::get<0>(tuple);
 				SET_ST(difference);
-				this->all_nodes[std::get<0>(tuple)].getNodeSt()[stId].setAxisId(item.first);
-				this->all_nodes[std::get<1>(tuple)].getNodeSt()[stId].setAxisId(item.first);
-				this->all_nodes[std::get<2>(tuple)].getNodeSt()[stId].setAxisId(item.first);
+				(*all_nodes)[std::get<0>(tuple)].getNodeSt()[stId].setAxisId(item.first);
+				(*all_nodes)[std::get<1>(tuple)].getNodeSt()[stId].setAxisId(item.first);
+				(*all_nodes)[std::get<2>(tuple)].getNodeSt()[stId].setAxisId(item.first);
+
+				
 
 				members[std::get<0>(tuple)] = 0;
 				members[std::get<1>(tuple)] = 0;
@@ -74,13 +82,16 @@ public:
 
 	}
 
-	node<int> getNodeById(int nodeId)
+	node* getNodeById(int nodeId)
 	{
-		for (auto& n : all_nodes)
+		for (auto& n : *all_nodes)
 		{
 			if (n.getIdNode() == nodeId)
-				return n;
+				return &n;
+			return nullptr;
 		}
 	}
+
+	
 };
 

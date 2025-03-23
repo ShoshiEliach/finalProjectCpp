@@ -22,7 +22,7 @@ priorityAxis::ElementAxis priorityAxis::top()
     return pq.top();
 }
 
-void priorityAxis::updateValue(const std::string& id, int& member, int newValue)
+void priorityAxis::updateValue(const std::string& id, int member, int newValue)
 {
     std::priority_queue<ElementAxis> tempQueue;
     while (!pq.empty()) {

@@ -7,41 +7,30 @@
 #include <queue>
 #include <vector>
 #include <string>
+#include "Element.h"
 using namespace std;
-template <typename T>
-
+//template <class T>
 class priorityQueue
 {
-
-
-public:
-    struct Element
-    {
-        int count1;
-        int count2;
-        int count_element;
-        std::string name1;
-        std::string name2;
-        std::string name_element;
-
-        Element(int c1, int c2, const string& n1, const string& n2) : count1(c1), count2(c2), count_element(c1 + c2), name1(n1), name2(n2), name_element(n1 + n2) {}
-
-        bool operator<(const Element& other) const {
-            return count_element < other.count_element;
-        }
-    };
-
-
-    void push(int c1, int c2, std::string& n1, std::string& n2);
-    Element* pop();
-    Element* top();
-    void checkForDuplicates();
-
-    void replace(string id, int p);
-    pair<string, string> getTopStringIds();
-
 private:
     priority_queue<Element> elementsPq;
+
+public:
+    priorityQueue(){}
+    //Car(const Car& other) : brand(other.brand), model(other.model), year(other.year) {}
+    priorityQueue(const priorityQueue& other):elementsPq(other.elementsPq){}
+    void push(Element& e);
+    Element* pop();
+    Element top();
+    void checkForDuplicates();
+    priority_queue<Element> getPq();
+    void setPq(priority_queue<Element> new_pq);
+
+    void replace(string id, int p);
+    pair<std::string, std::string> getTopStringIds();
+    bool isEmpty() {
+        return elementsPq.empty();
+    }
 };
 #endif //PRIORITYQUEUE_H
 

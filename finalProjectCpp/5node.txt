@@ -1,0 +1,50 @@
+Hello, this is node5:
+st:A1
+num of cars:0
+not waiters
+priority:0
+st:A2
+num of cars:0
+not waiters
+priority:0
+st:A3
+num of cars:0
+not waiters
+priority:0
+st:B1
+num of cars:0
+not waiters
+priority:0
+st:B2
+num of cars:0
+not waiters
+priority:0
+st:B3
+num of cars:0
+not waiters
+priority:0
+st:C1
+num of cars:0
+not waiters
+priority:0
+st:C2
+num of cars:0
+not waiters
+priority:0
+st:C3
+num of cars:0
+not waiters
+priority:0
+st:D1
+num of cars:0
+not waiters
+priority:0
+st:D2
+num of cars:0
+not waiters
+priority:0
+st:D3
+num of cars:0
+not waiters
+priority:0
+the green is:A2,

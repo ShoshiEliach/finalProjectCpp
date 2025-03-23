@@ -1,19 +1,19 @@
 ﻿#include "priorityQueue.h"
 #include <stdexcept>
-
+#include "Element.h"
+#include <string>
+#include "string.h"
 //push
+using namespace std;
 
-
-template<typename T>
-void priorityQueue<T>::push(int c1, int c2, std::string& n1, std::string& n2)
+void priorityQueue::push(Element& e)
 {
-    Element newElement(c1, c2, n1, n2);
+    Element newElement(e);
     this->elementsPq.push(newElement);
 }
 
 //pop
-template<typename T>
-typename priorityQueue<T>::Element* priorityQueue<T>::pop()
+ Element* priorityQueue::pop()
 {
     if (!elementsPq.empty())
     {
@@ -29,41 +29,36 @@ typename priorityQueue<T>::Element* priorityQueue<T>::pop()
 }
 
 
-template <typename T>
-pair<string, string> priorityQueue<T>::getTopStringIds()
+pair<std::string, std::string> priorityQueue::getTopStringIds()
 {
+    std::pair<std::string, std::string> returnPair;
     if (!elementsPq.empty()) {
-        Element topElement = elementsPq.top(); // ���� ����� ���� ����
-        return make_pair(topElement.name1, topElement.name2); // ����� �� ��� ����� �string id
+        Element topElement = elementsPq.top(); 
+        std::string name1 = topElement.getName1();
+        std::string name2 = topElement.getName2();// ���� ����� ���� ����
+         returnPair= std::make_pair(name1, name2);
     }
-    return make_pair("", "");
+    return returnPair;
 }
 
 //replace
-template <typename T>
-void priorityQueue<T>::replace(string id, int priority)
+void priorityQueue::replace(string id, int p)
 {
 
-    priorityQueue<Element> tempQueue;
+    priority_queue<Element> tempQueue;
     while (!elementsPq.empty())
     {
         Element current = elementsPq.top();
         elementsPq.pop();
-
-        if (current.name1 == id)
-        {
-            current.count1 = priority;
-        }
-        if (current.name2 == id)
-        {
-            current = priority;
-        }
+        if (current.getName1() == id)
+                current.setCount1(p);
+        if (current.getName2() == id)
+             current.setCount2(p);
+            
+        current.setCount_element(current.getCount1() + current.getCount2());
         tempQueue.push(current);
-
-
     }
-
-    elementsPq = tempQueue;
+    elementsPq= tempQueue;
 
 }
 
@@ -71,19 +66,20 @@ void priorityQueue<T>::replace(string id, int priority)
 
 
 //top
-template <typename T>
-typename priorityQueue<T>::Element* priorityQueue<T>::top()
+ Element priorityQueue::top()
 {
+     Element topElement;
 
     if (!elementsPq.empty())
     {
-        Element topElement = elementsPq.top();
+         topElement = elementsPq.top();
 
-        return &topElement;
+       
     }
-    else {
+    return topElement;
+  /*  else {
         return nullptr;
-    }
+    }*/
 
     //template<typename T>
     //bool priorityQueue<T>::checkForDuplicates()
@@ -92,13 +88,24 @@ typename priorityQueue<T>::Element* priorityQueue<T>::top()
     //}
 }
 
-template<typename T>
-void priorityQueue<T>::checkForDuplicates()
+void priorityQueue::checkForDuplicates()
 {
     std::vector<Element> elementsCopy; // ����� ���� �� �� �������
     while (!elementsPq.empty())
     {
-        Element* currentElement = elementsPq.top(); // ������ �� ����� ���� ����
+        Element currentElement = elementsPq.top(); // ������ �� ����� ���� ����
         elementsPq.pop();
     }
 }
+
+priority_queue<Element> priorityQueue::getPq()
+{
+    return elementsPq;
+}
+
+void priorityQueue::setPq(priority_queue<Element> new_pq)
+{
+    elementsPq = new_pq;
+}
+
+

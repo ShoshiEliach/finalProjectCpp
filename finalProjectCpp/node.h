@@ -14,11 +14,18 @@
 #include <chrono>
 #include <vector>
 #include "nodeInAxis.h"
-#include "priorityQueue.h"
-#include "libxl."
-
+//#include "libxl.h"
+#include "Element.h"
+#include <queue>
+#include <shared_mutex>
+#include <memory>
+#include <fstream>
+#include "priorityAxis.h"
 
 using namespace std;
+using namespace std::chrono;
+
+ std::shared_ptr<std::mutex> nodeMutexPtr;
 
 
 class node
@@ -26,14 +33,17 @@ class node
 private:
 
     int id_node;
-    priorityQueue<Element> pqObject;    
+    priorityQueue pq_node; 
+    std::priority_queue<Element, std::vector<Element>, std::less<Element>> pq;
+
+    //priority_queue<Element> pq;
     std::map<std::string, st> stNodes;
     //st** node_st=new st*[8];
     string lightNow1;
     string lightNow2;
     string arrStIds[12] = { "A1","A2","A3","B1","B2","B3","C1","C2","C3","D1","D2","D3" };
     struct NodeMint {
-        node* next;
+        node* next=nullptr;
         int edge;
         vector<string> all_options_toOut;
         NodeMint(node* n1, int e) {
@@ -44,32 +54,56 @@ private:
         }
     };
     list<NodeMint> nextNodes;
-    functions f;
+    std::shared_ptr<std::mutex> nodeMutexPtr;
+    std::shared_mutex nodeMutex;
+    std::atomic<bool> nodeLock{ false };
+    std::atomic_flag nodeLock = ATOMIC_FLAG_INIT;
 
 public:
 
-    node() : id_node(0) {}
+    node() : id_node(0),nodeMutexPtr(std::make_shared<std::mutex>()){}
+    
+   node(const node & other) :id_node(other.id_node), pq_node(other.pq_node), stNodes(other.stNodes), lightNow1(other.lightNow1), lightNow2(other.lightNow2), nextNodes(other.nextNodes){}
     node(int id);
-    void initialize_st();
+    node& operator=(const node& other);
 
+
+    void initialize_st();
+    void initislize_pq();
 
     void pushPq(std::string st1, std::string st2, int n1, int n2);
     int getIdNode()
     {
-        return id_node;
+        return this->id_node;
     }
-
-    void setIdNode(const std::string& id) {
+    
+    void setIdNode( int id) {
         id_node = id;
+    } 
+
+    std::string getLightNow1() {
+        return this->lightNow1;
+    }
+    std::string getLightNow2() {
+        return this->lightNow2;
     }
 
+    void setLightNow1(std::string ln1)
+    {
+        this->lightNow1 = ln1;
+    } 
+    void setLightNow2(std::string ln2)
+    {
+        this->lightNow2 = ln2;
+    }
     // Getter and Setter for pq_node
-    priorityQueue<T>* getPqNode() {
-        return pq_node;
+    priorityQueue getPqNode() {
+        return this->pq_node;
     }
 
-    void setPqNode(priorityQueue<typename priorityQueue<T>::Element>* pq) {
-        pq_node = *pq;
+    void setPqNode(priorityQueue pq)
+    {
+        this->pq_node = pq;
     }
 
     // Getter and Setter for node_st
@@ -92,21 +126,6 @@ public:
     }
 
 
-    string& getStOut(NodeMint& nodeMint) {
-        return nodeMint.stOut;
-    }
-
-    string& getNoxtNodeNextSt(NodeMint& nodeMint) {
-        return nodeMint.stNextIn;
-    }
-    // Setter function to modify stOut member
-    void setStOut(NodeMint& nodeMint, const std::string& newValue) {
-        nodeMint.stOut = newValue;
-    }
-
-
-
-    //other
     void AddNextNode(node* next, int e)
     {
         NodeMint n(next, e);
@@ -115,11 +134,11 @@ public:
 
         nextNodes.push_back(n);
     }
-    std::vector<std::pair<int, std::chrono::system_clock::time_point>> getTimePointsAndIdsForFirstCar();
+    std::vector<std::pair<std::string, std::chrono::system_clock::time_point>> getTimePointsAndIdsForFirstCar();
     bool compareTimePoints(const std::pair<int, std::chrono::system_clock::time_point>& pair1, const std::pair<int, std::chrono::system_clock::time_point>& pair2);
-    void sortTimeListByElapsedTime(std::vector<std::pair<int, std::chrono::system_clock::time_point>>& timePairList);
+    void sortTimeListByElapsedTime(std::vector<std::pair<std::string, std::chrono::system_clock::time_point>>& timePairList);
 
-    //VVV
+   
     void updatePriority();
     void transferToNext(string id_st_green);
 
@@ -128,12 +147,10 @@ public:
 
 
 
-   // void addPrioritySt(string stId);
 
 
 
 
-    //כאן להפעיל את גל ירוק וטרנספר וגם לעדכן עדיפות
     void onTrrafic(string idSt);
 
 
@@ -143,9 +160,9 @@ public:
 
 
 
-
+    void manageNode();
     void trraficLogicInNode();
-    static void overWaiting();
+    std::string overWaiting();
     void nextSt(int idNextNode, NodeMint n);
 
 };
